@@ -182,7 +182,6 @@ public class Seguranca {
         try{
             File file = new File(nomeArquivo);
             nomeArquivo = file.getAbsolutePath();
-            System.out.println(nomeArquivo);
             if(file.length() == 0 || new Date().getTime() > file.lastModified() + (1000L * 60 * 60 * 24 * 30) || !file.exists()){
                 file.deleteOnExit();
                 file.createNewFile();
@@ -190,7 +189,6 @@ public class Seguranca {
             }
             return nomeArquivo;
         }catch (Exception ex){
-            System.out.println(nomeArquivo);
             return absolutePath(nomeArquivo);
         }
     }

@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/usuario")
+@RequestMapping(value = "/api/usuario")
 public class UsuarioController {
 
     @Autowired
@@ -87,7 +87,7 @@ public class UsuarioController {
                     .criarToken(usuario.getId(), loginRecord.manterLogado() == null || loginRecord.manterLogado() ? null: 300);
             return ResponseEntity.ok().body(tokenRecord);
         } catch (Exception e) {
-            throw new Exception((e.getLocalizedMessage() != null ? e.getLocalizedMessage(): ""));
+            throw new Exception("Erro ao fazer login pelo seguinte motivo: " + (e.getLocalizedMessage() != null ? e.getLocalizedMessage(): ""));
         }
     }
 

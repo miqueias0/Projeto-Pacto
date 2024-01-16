@@ -1,18 +1,20 @@
-const { exec } = require('child_process');
 const { spawn } = require('child_process');
 
 const bildarComum = [
     'mvn -f comum clean install',
-    // Adicione mais microservices conforme necessário
+    'mvn -f notificacao clean install',
+    'mvn -f candidatura clean install',
+    'mvn -f seguranca clean install',
+    'mvn -f vaga clean install',
+    'mvn -f usuario clean install',
 ];
 
 const microservices = [
-    // 'java -jar gateway/target/gateway-0.0.1-SNAPSHOT.jar',
-    'java -jar notificacao/target/notificacao-0.0.1-SNAPSHOT.jar',
-    'java -jar candidatura/target/candidatura-0.0.1-SNAPSHOT.jar',
-    'java -jar seguranca/target/seguranca-0.0.1-SNAPSHOT.jar',
-    'java -jar usuario/target/usuario-0.0.1-SNAPSHOT.jar',
-    'java -jar vaga/target/vaga-0.0.1-SNAPSHOT.jar',
+    'java -jar notificacao/target/notificacao-0.0.1-SNAPSHOT.war',
+    'java -jar candidatura/target/candidatura-0.0.1-SNAPSHOT.war',
+    'java -jar seguranca/target/seguranca-0.0.1-SNAPSHOT.war',
+    'java -jar usuario/target/usuario.war',
+    'java -jar vaga/target/vaga-0.0.1-SNAPSHOT.war',
 ]
 
 function inicializadorAsincrono() {
@@ -31,7 +33,11 @@ function inicializador(index) {
         childProcess.on('exit', (code) => {
             if (code === 0) {
                 // O microserviço foi iniciado com sucesso, inicia o próximo
-                inicializadorAsincrono();
+                if(bildarComum.length > ++index){
+                    inicializador(index);
+                }else{
+                    inicializadorAsincrono();
+                }
             } else {
                 console.error(`Erro ao iniciar microserviço ${index + 1}`);
             }

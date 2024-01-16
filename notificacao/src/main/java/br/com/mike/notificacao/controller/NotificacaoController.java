@@ -87,7 +87,7 @@ public class NotificacaoController {
             AutenticacaoRecord autenticacaoRecord = new AutenticationService(sec).validarToken();
             VagaRecord vagaRecord = new VagaService(sec).obterPorId(candidaturaRecord.vagaId());
             Notificacao notificacao = new Notificacao();
-            notificacao.setCandidatoId(candidaturaRecord.candidatoId());
+            notificacao.setCandidatoId(autenticacaoRecord.identificador());
             notificacao.setVagaId(candidaturaRecord.vagaId());
             notificacao.setContratanteId(vagaRecord.contratanteId());
             notificacao.setCandidatoNotificado(Boolean.FALSE);

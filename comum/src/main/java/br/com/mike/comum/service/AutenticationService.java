@@ -25,7 +25,6 @@ import java.util.Properties;
      public AutenticationService(HttpHeaders sec) throws Exception{
          restTemplate = new RestTemplate();
          restTemplate.setInterceptors(Collections.singletonList(new Inteceptor(sec)));
-         CAMINHO = System.getProperty("seguranca");
          CarregarProperties properties = new CarregarProperties("comum.properties");
          CAMINHO = properties.getProperties().getProperty("seguranca");
      }

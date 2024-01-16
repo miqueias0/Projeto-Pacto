@@ -21,11 +21,13 @@ public class CandidaturaService {
 
     private RestTemplate restTemplate;
     private String CAMINHO;
+    private HttpHeaders sec;
     public CandidaturaService(HttpHeaders sec) throws Exception{
         restTemplate = new RestTemplate();
         restTemplate.setInterceptors(Collections.singletonList(new Inteceptor(sec)));
         CarregarProperties properties = new CarregarProperties("comum.properties");
         CAMINHO = properties.getProperties().getProperty("candidatura");
+        this.sec = sec;
     }
 
     public CandidaturaRecord obterPorId() throws Exception {
@@ -53,11 +55,13 @@ public class CandidaturaService {
     }
 
     public CandidaturaRecord manter(CandidaturaRecord candidaturaRecord) throws Exception {
-        return restTemplate.postForObject(CAMINHO + "/manter", candidaturaRecord, CandidaturaRecord.class);
+        sec.remove("content-length");
+        return restTemplate.postForObject(CAMINHO + "/manter", new HttpEntity<>(candidaturaRecord, sec), CandidaturaRecord.class);
     }
 
     public MensagemRetorno excluir(CandidaturaRecord candidaturaRecord) throws Exception {
-        restTemplate.postForEntity(CAMINHO + "/excluir", candidaturaRecord, Void.class);
+        sec.remove("content-length");
+        restTemplate.postForEntity(CAMINHO + "/excluir", new HttpEntity<>(candidaturaRecord, sec), Void.class);
         return new MensagemRetorno("Sucesso");
     }
 

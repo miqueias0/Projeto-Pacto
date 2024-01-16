@@ -11,10 +11,10 @@ public class Candidatura {
     @Column(name = "id", nullable = false, unique = true, updatable = false)
     private String id;
 
-    @Column(name = "vaga_id", nullable = false, unique = true, updatable = false)
+    @Column(name = "vaga_id", nullable = false, updatable = false)
     private String vagaId;
 
-    @Column(name = "candidato_id", nullable = false, unique = true, updatable = false)
+    @Column(name = "candidato_id", nullable = false, updatable = false)
     private String candidatoId;
 
     public String getId() {

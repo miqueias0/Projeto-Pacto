@@ -26,8 +26,8 @@ public class Seguranca {
     private  AesKey privateKey;
     private  AesKey publicKey;
     public Seguranca() throws IOException {
-        privateKey = new AesKey(new BufferedReader(new FileReader(absolutePath("src/main/resources/keys/privateKey.pdf"))).readLine().getBytes());
-        publicKey = new AesKey(new BufferedReader(new FileReader(absolutePath("src/main/resources/keys/publicKey.pdf"))).readLine().getBytes());
+        privateKey = new AesKey(new BufferedReader(new FileReader(absolutePath("seguranca/src/main/resources/keys/privateKey.pdf"))).readLine().getBytes());
+        publicKey = new AesKey(new BufferedReader(new FileReader(absolutePath("seguranca/src/main/resources/keys/publicKey.pdf"))).readLine().getBytes());
     }
 
     public String criarToken(Autenticacao autenticacao) {
@@ -182,13 +182,15 @@ public class Seguranca {
         try{
             File file = new File(nomeArquivo);
             nomeArquivo = file.getAbsolutePath();
-            if(file.length() == 0 || new Date().getTime() > file.lastModified() + (1000L * 60 * 60 * 24 * 30)){
+            System.out.println(nomeArquivo);
+            if(file.length() == 0 || new Date().getTime() > file.lastModified() + (1000L * 60 * 60 * 24 * 30) || !file.exists()){
                 file.deleteOnExit();
                 file.createNewFile();
                 gerarChave(nomeArquivo);
             }
             return nomeArquivo;
         }catch (Exception ex){
+            System.out.println(nomeArquivo);
             return absolutePath(nomeArquivo);
         }
     }

@@ -35,6 +35,19 @@ public class UsuarioController {
 
     }
 
+    @GetMapping(value = "/obterPorIdParam")
+    @CrossOrigin("*")
+    public ResponseEntity<UsuarioRecord> obterPorIdParam(@RequestHeader HttpHeaders sec, @RequestParam("id") String id) throws Exception {
+        try {
+            AutenticacaoRecord autenticacaoRecord = new AutenticationService(sec).validarToken();
+            UsuarioRecord usuarioRecord = converterUsuario(usuarioService.obterPorId(id));
+            return ResponseEntity.ok().body(usuarioRecord);
+        } catch (Exception e) {
+            throw new Exception("Erro ao obter por id pelo seguinte motivo: " + (e.getLocalizedMessage() != null ? e.getLocalizedMessage(): ""));
+        }
+
+    }
+
     @PostMapping(value = "/manter")
     @CrossOrigin("*")
     @Transactional(rollbackFor = Exception.class)

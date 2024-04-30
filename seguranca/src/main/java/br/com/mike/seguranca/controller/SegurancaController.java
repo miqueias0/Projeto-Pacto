@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Objects;
 
 @RestController
-@RequestMapping(value = "/seguranca")
+@RequestMapping(value = "/api/seguranca")
 public class SegurancaController {
 
     private final br.com.mike.seguranca.negocio.Seguranca seguranca = new br.com.mike.seguranca.negocio.Seguranca();

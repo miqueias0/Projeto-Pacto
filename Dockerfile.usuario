@@ -1,0 +1,6 @@
+ARG APP_TYPE=usuario
+FROM openjdk:21
+
+COPY /usuario/target/usuario.jar app.jar
+
+CMD ["java", "-jar", "app.jar"]

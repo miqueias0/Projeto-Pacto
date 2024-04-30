@@ -1,5 +1,7 @@
 ## Para Rodar a aplicação em Dev Mode
 
+- Para rodar o projeto é necessário baixar e adicionar a variáveis de ambiemte o JDK21
+
 Execute o código abaixo para baixar as dependencias do inicializador.
 ```shell script
 npm i

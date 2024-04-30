@@ -1,0 +1,75 @@
+services:
+  seguranca:
+    build: 
+      context: .
+      dockerfile: Dockerfile.seguranca
+    container_name: seguranca
+    ports:
+      - 8086:8081
+    networks:
+      - microservice
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '0.1'
+    #       memory: '0.5G'
+  vaga:
+    build: 
+      context: .
+      dockerfile: Dockerfile.vaga
+    container_name: vaga
+    networks:
+      - microservice
+    ports:
+      - 8085:8081
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: '0.5G'
+  usuario:
+    build: 
+      context: .
+      dockerfile: Dockerfile.usuario
+    container_name: usuario
+    ports:
+      - 8084:8081
+    networks:
+      - microservice
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: '0.5G'
+  candidatura:
+    build: 
+      context: .
+      dockerfile: Dockerfile.candidatura
+    container_name: candidatura
+    ports:
+      - 8083:8081
+    networks:
+      - microservice
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: '0.5G'
+  notificacao:
+    build: 
+      context: .
+      dockerfile: Dockerfile.notificacao
+    container_name: notificacao
+    ports:
+      - 8082:8081
+    networks:
+      - microservice
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: '0.5G'
+
+networks:
+  microservice:
+    driver: bridge

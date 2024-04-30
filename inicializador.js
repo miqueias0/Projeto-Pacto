@@ -33,9 +33,9 @@ function inicializador(index) {
         childProcess.on('exit', (code) => {
             if (code === 0) {
                 // O microserviço foi iniciado com sucesso, inicia o próximo
-                if(bildarComum.length > ++index){
+                if (bildarComum.length > ++index) {
                     inicializador(index);
-                }else{
+                } else {
                     inicializadorAsincrono();
                 }
             } else {

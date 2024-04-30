@@ -1,0 +1,6 @@
+ARG APP_TYPE=seguranca
+FROM openjdk:21
+
+COPY /seguranca/target/seguranca.jar app.jar
+
+CMD ["java", "-jar", "app.jar"]

@@ -1,0 +1,6 @@
+ARG APP_TYPE=notificacao
+FROM openjdk:21
+
+COPY /notificacao/target/notificacao.jar app.jar
+
+CMD ["java", "-jar", "app.jar"]
